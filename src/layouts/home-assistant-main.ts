@@ -57,7 +57,7 @@ class HomeAssistantMain extends LitElement {
     return html`
       <mwc-drawer
         .type=${sidebarNarrow ? "modal" : ""}
-        .open=${sidebarNarrow ? this._drawerOpen : true}
+        .open=${sidebarNarrow ? this._drawerOpen : undefined}
         @MDCDrawer:closed=${this._drawerClosed}
       >
         <ha-sidebar
