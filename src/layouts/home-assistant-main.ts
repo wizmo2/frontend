@@ -156,6 +156,11 @@ class HomeAssistantMain extends LitElement {
         /* allow a light tap highlight on the actual interface elements  */
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
       }
+      @media (min-width: 870px) {
+        partial-panel-resolver {
+          --mdc-top-app-bar-width: calc(100% - var(--mdc-drawer-width));
+        }
+      }
     `;
   }
 }
