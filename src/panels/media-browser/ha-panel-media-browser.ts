@@ -1,4 +1,4 @@
-import { mdiArrowLeft } from "@mdi/js";
+import { mdiArrowLeft, mdiLocationEnter } from "@mdi/js";
 import "@polymer/app-layout/app-header/app-header";
 import "@polymer/app-layout/app-toolbar/app-toolbar";
 import "@material/mwc-button";
@@ -17,6 +17,7 @@ import { navigate } from "../../common/navigate";
 import "../../components/ha-menu-button";
 import "../../components/ha-icon-button";
 import "../../components/ha-icon-button-arrow-prev";
+import "../../components/search-input";
 import "../../components/media-player/ha-media-player-browse";
 import "../../components/media-player/ha-media-manage-button";
 import type {
@@ -63,6 +64,8 @@ class PanelMediaBrowser extends LitElement {
   public narrow!: boolean;
 
   @property() public route!: Route;
+
+  @property() public filter?: string;
 
   @state() _currentItem?: MediaPlayerItem;
 
@@ -112,6 +115,19 @@ class PanelMediaBrowser extends LitElement {
             ></ha-media-manage-button>
           </app-toolbar>
         </app-header>
+        <div>
+          <search-input
+            .hass=${this.hass}
+            .filter=${this.filter}
+            @value-changed=${this._handleFilter}
+            .label=${this.hass.localize("common.search")}
+          >
+          </search-input>
+          <ha-icon-button-arrow-prev
+            .path=${mdiLocationEnter}
+            @click=${this._searchMedia}
+          ></ha-icon-button-arrow-prev>
+        </div>
         <ha-media-player-browse
           .hass=${this.hass}
           .entityId=${this._entityId}
@@ -188,6 +204,19 @@ class PanelMediaBrowser extends LitElement {
     navigate(
       createMediaPanelUrl(this._entityId, this._navigateIds.slice(0, -1))
     );
+  }
+
+  private _handleFilter(ev: CustomEvent) {
+    this.filter = ev.detail.value;
+  }
+
+  private _searchMedia() {
+    if (this.filter) {
+      this._navigateIds[this._navigateIds.length - 1].media_content_id =
+        "*" + this.filter;
+
+      navigate(createMediaPanelUrl(this._entityId, this._navigateIds));
+    }
   }
 
   private _mediaBrowsed(ev: { detail: HASSDomEvents["media-browsed"] }) {
@@ -293,6 +322,12 @@ class PanelMediaBrowser extends LitElement {
           bottom: 0;
           left: 0;
           right: 0;
+        }
+
+        search-input {
+          display: block;
+          --mdc-text-field-fill-color: var(--sidebar-background-color);
+          --mdc-text-field-idle-line-color: var(--divider-color);
         }
       `,
     ];
