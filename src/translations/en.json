@@ -811,6 +811,11 @@
           "icon_error": "Icons should be in the format 'prefix:iconname', e.g. 'mdi:home'",
           "entity_id": "Entity ID",
           "unit_of_measurement": "Unit of Measurement",
+          "precipitation_unit": "Precipitation unit",
+          "pressure_unit": "Barometric pressure unit",
+          "temperature_unit": "Temperature unit",
+          "visibility_unit": "Visibility unit",
+          "wind_speed_unit": "Wind speed unit",
           "device_class": "Show as",
           "device_classes": {
             "binary_sensor": {
@@ -1010,7 +1015,7 @@
       },
       "domain_toggler": {
         "title": "Toggle Domains",
-        "reset_entities": "Reset Entities"
+        "reset_entities": "Reset Entity overrides"
       },
       "mqtt_device_debug_info": {
         "title": "{device} debug info",
@@ -1160,7 +1165,7 @@
           },
           "tags": {
             "main": "Tags",
-            "secondary": "Setup NFC tags and QR codes"
+            "secondary": "Set up NFC tags and QR codes"
           },
           "people": {
             "main": "People",
@@ -2431,15 +2436,16 @@
           },
           "alexa": {
             "title": "Alexa",
-            "banner": "Editing which entities are exposed via this UI is disabled because you have configured entity filters in configuration.yaml.",
-            "exposed_entities": "Exposed entities",
-            "not_exposed_entities": "Not exposed entities",
-            "manage_domains": "Manage domains",
-            "expose_entity": "Expose entity",
-            "dont_expose_entity": "Don't expose entity",
-            "follow_domain": "Follow domain",
-            "exposed": "{selected} exposed",
-            "not_exposed": "{selected} not exposed",
+            "banner": "[%key:ui::panel::config::cloud::google::banner%]",
+            "exposed_entities": "[%key:ui::panel::config::cloud::google::exposed_entities%]",
+            "not_exposed_entities": "[%key:ui::panel::config::cloud::google::not_exposed_entities%]",
+            "manage_defaults": "[%key:ui::panel::config::cloud::google::manage_defaults%]",
+            "manage_defaults_dialog_description": "[%key:ui::panel::config::cloud::google::manage_defaults_dialog_description%]",
+            "expose_entity": "[%key:ui::panel::config::cloud::google::expose_entity%]",
+            "dont_expose_entity": "[%key:ui::panel::config::cloud::google::dont_expose_entity%]",
+            "follow_domain": "[%key:ui::panel::config::cloud::google::follow_domain%]",
+            "exposed": "[%key:ui::panel::config::cloud::google::exposed%]",
+            "not_exposed": "[%key:ui::panel::config::cloud::google::not_exposed%]",
             "expose": "Expose to Alexa"
           },
           "dialog_certificate": {
@@ -2456,7 +2462,8 @@
             "banner": "Editing which entities are exposed via this UI is disabled because you have configured entity filters in configuration.yaml.",
             "exposed_entities": "Exposed entities",
             "not_exposed_entities": "Not exposed entities",
-            "manage_domains": "Manage domains",
+            "manage_defaults": "Manage defaults",
+            "manage_defaults_dialog_description": "Entities can be exposed by default based on their type.",
             "expose_entity": "Expose entity",
             "dont_expose_entity": "Don't expose entity",
             "follow_domain": "Follow domain",
@@ -3100,6 +3107,7 @@
             "reinterview_device": "Re-interview Device",
             "heal_node": "Heal Device",
             "remove_failed": "Remove Failed Device",
+            "update_firmware": "Update Device Firmware",
             "highest_security": "Highest Security",
             "unknown": "Unknown",
             "zwave_plus": "Z-Wave Plus",
@@ -3306,6 +3314,43 @@
             "healing_complete": "{device} has been healed.",
             "in_progress": "{device} healing is in progress.",
             "network_heal_in_progress": "A Z-Wave network heal is already in progress. Please wait for it to finish before healing an individual device."
+          },
+          "update_firmware": {
+            "title": "Update Device Firmware",
+            "warning": "WARNING: Firmware updates can brick your device if you do not correctly follow the manufacturer's guidance. The Home Assistant and Z-Wave JS teams do not take any responsibility for any damages to your device as a result of the firmware update and will not be able to help you if you brick your device. Would you still like to continue?",
+            "introduction": "Select the firmware file you would like to use to update {device}.",
+            "upload_firmware": "Upload Firmware",
+            "firmware_target_intro": "Select the firmware target (0 for the Z-Wave chip, ≥1 for other chips if they exist) for this update, or uncheck the box to have the driver attempt to figure it out from the firmware file.",
+            "firmware_target": "Firmware Target (chip)",
+            "upload_failed": "Upload Failed",
+            "begin_update": "Begin Firmware Update",
+            "queued": "The firmware update is ready to be sent to {device} but the device is asleep, wake the device to start the update.",
+            "close_queued": "If you close this dialog, the update will continue to be queued in the background and start automatically once the device wakes up.",
+            "awake": "The firmware update should start being sent to {device} shortly.",
+            "close": "If you close this dialog, the update will continue in the background.",
+            "in_progress": "The firmware update on {device} is in progress ({progress}%).",
+            "abort": "Abort Firmware Update",
+            "abort_failed": "Abort Failed",
+            "confirm_abort": "Are you sure you want to abort the firmware update on {device}?",
+            "finished_status": {
+              "ok": "Successfully updated firmware on {device}: {message}.",
+              "error": "Unable to update firmware on {device}: {message}.",
+              "try_again": "To attempt the firmware update again, select the new firmware file you would like to use.",
+              "done": "The firmware update is complete! If you want to attempt another firmware update on this device, please wait until it gets re-interviewed.",
+              "Error_Timeout": "Timed Out",
+              "Error_Checksum": "Checksum Error",
+              "Error_TransmissionFailed": "Transmission Failed",
+              "Error_InvalidManufacturerID": "Invalid Manufacturer ID",
+              "Error_InvalidFirmwareID": "Invalid Firmware ID",
+              "Error_InvalidFirmwareTarget": "Invalid Firmware Target",
+              "Error_InvalidHeaderInformation": "Invalid Header Information",
+              "Error_InvalidHeaderFormat": "Invalid Header Format",
+              "Error_InsufficientMemory": "Insufficient Memory",
+              "Error_InvalidHardwareVersion": "Invalid Hardware Version",
+              "OK_WaitingForActivation": "Waiting for Activiation",
+              "OK_NoRestart": "No Restart",
+              "OK_RestartPending": "Restart Pending"
+            }
           },
           "logs": {
             "title": "Z-Wave JS Logs",
